@@ -1,0 +1,274 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Kanit', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: #0d1a0d;
+    overflow: hidden;
+}
+
+.screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to bottom, #142e14, #050d05);
+    padding: 10px 16px;
+    color: #fff;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+h1 {
+    color: #ffd700;
+    font-size: 22px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+.app-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-action {
+    background: #2e7d32;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-action:hover {
+    background: #4caf50;
+}
+
+#btn-install {
+    background: #ff9800;
+}
+
+#btn-install:hover {
+    background: #ffb74d;
+}
+
+.content-scrollable {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.content-scrollable::-webkit-scrollbar {
+    width: 6px;
+}
+
+.content-scrollable::-webkit-scrollbar-thumb {
+    background: #4caf50;
+    border-radius: 4px;
+}
+
+h2 {
+    font-size: 14px;
+    color: #a5d6a7;
+    margin-top: 4px;
+}
+
+.character-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 8px;
+    width: 160px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.card:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.card.selected {
+    border-color: #ffd700;
+    background: rgba(76, 175, 80, 0.3);
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+}
+
+.avatar-frame {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 4px auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #ffd700;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    background: #1e3a1e;
+}
+
+.char-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.card h3 {
+    font-size: 13px;
+    color: #fff;
+}
+
+.card p {
+    font-size: 10px;
+    color: #bbb;
+}
+
+.mode-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 90%;
+    max-width: 500px;
+}
+
+.mode-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0,0,0,0.4);
+    padding: 6px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.mode-card strong {
+    font-size: 12px;
+    color: #fff;
+}
+
+.mode-card p {
+    font-size: 10px;
+    color: #aaa;
+}
+
+.mode-card.selected {
+    border-color: #81c784;
+    background: rgba(76, 175, 80, 0.25);
+}
+
+.btn-start {
+    background: linear-gradient(45deg, #4caf50, #2e7d32);
+    color: white;
+    border: none;
+    padding: 10px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    margin-bottom: 10px;
+}
+
+#gameCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#hud {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 6px 12px;
+    border-radius: 8px;
+    z-index: 10;
+}
+
+.badge {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.btn-back {
+    background: #e53935;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.hud-item {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.toast {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 167, 38, 0.95);
+    color: #000;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    z-index: 10;
+}

@@ -1,0 +1,21 @@
+{
+  "name": "PotterWinner Trail Run",
+  "short_name": "PotterWinner",
+  "start_url": "./index.html",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#0d1a0d",
+  "theme_color": "#2e7d32",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
