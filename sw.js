@@ -1,4 +1,4 @@
-const CACHE_NAME = 'potterwinner-v10';
+const CACHE_NAME = 'potterwinner-v7';
 const ASSETS = [
   './',
   './index.html',
@@ -7,6 +7,8 @@ const ASSETS = [
   './manifest.json',
   './potter.jpg',
   './winner.jpg',
+  './face-potter.jpg',
+  './face-winner.jpg',
   './icon-192.png',
   './icon-512.png'
 ];
@@ -30,7 +32,12 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
+  if (e.request.method !== 'GET') return;
   e.respondWith(
-    fetch(e.request).catch(() => caches.match(e.request))
+    fetch(e.request).then((res) => {
+      const copy = res.clone();
+      if (res.ok) caches.open(CACHE_NAME).then((c) => c.put(e.request, copy));
+      return res;
+    }).catch(() => caches.match(e.request))
   );
 });

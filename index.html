@@ -6,7 +6,7 @@
     <title>PotterWinner - Trail Jungle Run</title>
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="potter.jpg">
+    <link rel="icon" href="icon-192.png">
     <meta name="theme-color" content="#2e7d32">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -30,14 +30,14 @@
                 <div class="character-container">
                     <div class="card selected" id="card-potter" onclick="selectCharacter('POTTER')">
                         <div class="avatar-frame">
-                            <img src="potter.jpg" alt="Potter" class="char-img">
+                            <img src="face-potter.jpg" alt="Potter" class="char-img">
                         </div>
                         <h3>POTTER (พอตเตอร์)</h3>
                         <p>นักวิ่งสายสปีด ลุยทุกเส้นทาง</p>
                     </div>
                     <div class="card" id="card-winner" onclick="selectCharacter('WINNER')">
                         <div class="avatar-frame">
-                            <img src="winner.jpg" alt="Winner" class="char-img">
+                            <img src="face-winner.jpg" alt="Winner" class="char-img">
                         </div>
                         <h3>WINNER (วินเนอร์)</h3>
                         <p>นักวิ่งอารมณ์ดี สายชิลล์ชมวิว</p>
@@ -50,7 +50,7 @@
                         <input type="radio" name="mode" value="SANDBOX" checked>
                         <div>
                             <strong>🛡️ โหมด Sandbox (วิ่งชมวิว ไม่ตาย)</strong>
-                            <p>ภูมิทัศน์กว้างใหญ่เปลี่ยนไปเรื่อยๆ ไม่มีวันตาย ปรับสปีดได้</p>
+                            <p>วิ่งชมวิว ไม่มีสิ่งกีดขวาง ไม่มีวันตาย ปรับสปีดได้ กระโดดเก็บเหรียญได้</p>
                         </div>
                     </label>
                     <label class="mode-card" id="mode-normal" onclick="selectMode('NORMAL')">
@@ -64,7 +64,7 @@
                         <input type="radio" name="mode" value="ADVENTURE">
                         <div>
                             <strong>🗺️ โหมดผจญภัย (Adventure)</strong>
-                            <p>พิชิตภารกิจสำรวจดินแดนใหม่ๆ ทั้งภูเขา ทะเล สวน แม่น้ำ</p>
+                            <p>วิ่งให้ครบ 1000 เมตร ผ่านภูเขา ทะเล ทุ่งนา สวน แม่น้ำ มี 3 ชีวิต</p>
                         </div>
                     </label>
                 </div>
@@ -79,8 +79,11 @@
 
             <div id="hud">
                 <button class="btn-back" onclick="backToMenu()">⬅️ เมนูหลัก</button>
-                
-                <div id="biome-badge" class="hud-item badge">📍 ภูมิประเทศ: <span id="biomeName">ภูเขาสูง 🏔️</span></div>
+                <button id="btn-pause" class="btn-back btn-pause" onclick="togglePause()">⏸️ พัก</button>
+
+                <div id="biome-badge" class="hud-item badge">📍 <span id="biomeName">ภูเขาสูงสดชื่น 🏔️</span></div>
+
+                <div class="hud-item badge">🪙 <span id="coinVal">0</span></div>
 
                 <div id="sandbox-controls" class="hud-item">
                     <label for="speedSlider">สปีด: <span id="speedVal">5</span>x</label>
@@ -88,15 +91,28 @@
                 </div>
 
                 <div id="normal-controls" class="hud-item hidden">
-                    <span>คะแนน: <span id="scoreVal">0</span> M</span>
+                    <span>ระยะ: <span id="scoreVal">0</span> M · สูงสุด <span id="bestVal">0</span></span>
                 </div>
 
                 <div id="adventure-controls" class="hud-item hidden">
-                    <span>ภารกิจ: <span id="questText">สำรวจ 0/1000M</span></span>
+                    <span id="livesVal">❤️❤️❤️</span> <span>ภารกิจ: <span id="questText">สำรวจ 0/1000M</span></span>
                 </div>
             </div>
 
-            <div id="toast" class="toast hidden">สะดุดกิ่งไม้! แต่โหมด Sandbox วิ่งต่อได้สบายๆ 🏃‍♂️</div>
+            <div id="hint" class="toast hint">👆 แตะหน้าจอ / กด Space เพื่อกระโดด (กระโดดซ้อนได้ 2 ครั้ง)</div>
+
+            <div id="overlay" class="hidden">
+                <div class="overlay-box">
+                    <h2 id="overlay-title"></h2>
+                    <p id="overlay-text"></p>
+                    <div class="overlay-actions">
+                        <button class="btn-start" onclick="restartGame()">🔁 เล่นอีกครั้ง</button>
+                        <button class="btn-start btn-secondary" onclick="backToMenu()">เมนูหลัก</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="toast" class="toast hidden"></div>
         </div>
     </div>
 
